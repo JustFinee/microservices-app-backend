@@ -13,16 +13,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/hello")
-    public String helloMethod()
-    {
-        return "Hello";
-    }
-
     @GetMapping("/findUser/{email}")
     public Optional<User> findUser(@PathVariable(name = "email") String email)
     {
-        System.out.println("jestem w user service");
         return userRepository.findByEmail(email);
     }
 }
