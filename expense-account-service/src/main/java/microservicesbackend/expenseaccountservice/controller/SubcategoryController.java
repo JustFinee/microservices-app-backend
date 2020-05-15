@@ -45,6 +45,20 @@ public class SubcategoryController {
         }
     }
 
+    @PostMapping("/addSubcategory")
+    public ResponseEntity<Subcategory> addSubcategory (@RequestParam String name, @RequestParam Long categoryId)
+    {
+        try{
+            Subcategory addSubcategory = subcategoryService.addSubcategory(name,categoryId);
+            return new ResponseEntity<>(addSubcategory,HttpStatus.CREATED);
+        }
+        catch (NotFoundException e)
+        {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Not found category with this id", e);
+        }
+    }
+
     @PostMapping("/createSubcategory")
     public ResponseEntity<Subcategory> createSubcategory(@RequestBody Subcategory subcategory)
     {

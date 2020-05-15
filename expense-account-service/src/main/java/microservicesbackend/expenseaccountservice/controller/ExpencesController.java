@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -40,7 +39,7 @@ public class ExpencesController {
 
     @PostMapping("/transfer/{idUser}")
     public ResponseEntity<Expence> transfer(@PathVariable("idUser") Long idUser, @RequestParam Long fromAccountId,
-                                            @RequestParam Long toAccountId, @RequestParam double amount, HttpServletResponse response)
+                                            @RequestParam Long toAccountId, @RequestParam int amount, HttpServletResponse response)
     {
         try
         {

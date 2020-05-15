@@ -17,7 +17,7 @@ public class Expence {
     @JoinColumn(name="ACCOUNT_ID")
     private Account account;
 
-    private double amount;
+    private int amount;
     private Date date;
     private String note;
 
@@ -30,7 +30,7 @@ public class Expence {
     public Expence() {
     }
 
-    public Expence(long idUser,Account account, double amount, Date date, String note, Subcategory subcategory, Type type) {
+    public Expence(long idUser,Account account, int amount, Date date, String note, Subcategory subcategory, Type type) {
         this.idUser = idUser;
         this.account = account;
         this.amount = amount;
@@ -64,11 +64,11 @@ public class Expence {
         this.account = account;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

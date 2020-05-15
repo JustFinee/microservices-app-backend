@@ -29,15 +29,6 @@ public class CategoryController {
 
     }
 
-    @PostMapping("/createCategory")
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-        Category createdCategory = categoryService.createCategory(category);
-
-        if (createdCategory != null) {
-            return new ResponseEntity<>(createdCategory, HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-    }
 
     @DeleteMapping("/deleteCategory/{idCategory}")
     public ResponseEntity<Void> deleteCategory(@PathVariable("idCategory") Long idCategory) {

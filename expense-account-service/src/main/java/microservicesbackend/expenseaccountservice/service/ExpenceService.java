@@ -36,7 +36,7 @@ public class ExpenceService {
         return expenceRepository.save(expence);
     }
 
-    public Expence transfer(Long idUser,Long from, Long to, double amount) throws NotFoundException
+    public Expence transfer(Long idUser,Long from, Long to, int amount) throws NotFoundException
     {
         Optional<Account> fromAccount = accountRepository.findById(from);
         Optional<Account> toAccount = accountRepository.findById(to);

@@ -1,9 +1,13 @@
 package microservicesbackend.expenseaccountservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","category"})
 public class Subcategory {
 
     @Id
@@ -12,16 +16,16 @@ public class Subcategory {
 
     private String name;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name="CATEGORY_ID")
-    private Category Category;
+    private Category category;
 
     public Subcategory() {
     }
 
     public Subcategory(String name, Category Category) {
         this.name = name;
-        this.Category = Category;
+        this.category = Category;
     }
 
     public long getSubcategoryId() {
@@ -32,6 +36,8 @@ public class Subcategory {
         this.subcategoryId = subcategoryId;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -40,11 +46,12 @@ public class Subcategory {
         this.name = name;
     }
 
+    @JsonBackReference
     public Category getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(Category category) {
-        this.Category = category;
+        this.category = category;
     }
 }
