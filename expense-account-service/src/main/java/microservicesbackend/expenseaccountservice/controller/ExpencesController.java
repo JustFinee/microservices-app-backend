@@ -24,6 +24,7 @@ public class ExpencesController {
     public ResponseEntity<List<Expence>> getExpenses(@PathVariable("userId") Long userId, @RequestParam Date from, @RequestParam Date to)
     {
         List<Expence> expences = expenceService.getExpences(userId,from,to);
+        System.out.println(from+" "+to);
 
         if (expences.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         else return new ResponseEntity<>(expences,HttpStatus.OK);

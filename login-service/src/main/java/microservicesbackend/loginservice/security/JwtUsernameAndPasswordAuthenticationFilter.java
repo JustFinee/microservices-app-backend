@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -84,7 +85,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 
 
-        response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+
+        response.addHeader("Bearer",token);
         response.addHeader("userId", String.valueOf(userInterface.findUser(auth.getName()).getId()));
+        Cookie cookie = new Cookie("Bearer", token);
+        Cookie cookie1 = new Cookie("userId", String.valueOf(userInterface.findUser(auth.getName()).getId()));
+        response.addCookie(cookie);
+        response.addCookie(cookie1);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.awt.font.OpenType;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,10 +43,10 @@ public class ExpenceService {
         Optional<Account> toAccount = accountRepository.findById(to);
         if (fromAccount.isEmpty() || toAccount.isEmpty()) throw new NotFoundException("There is no account with with id: " +from + "or "+ to);
 
-        Expence transferOut = new Expence(idUser,fromAccount.get(),amount, Date.valueOf(LocalDate.now()),
+        Expence transferOut = new Expence(idUser,fromAccount.get(),amount, LocalDateTime.now(),
                 "Transfer OUT",null, Type.TRANSFER_OUT);
 
-        Expence transferIn = new Expence(idUser,toAccount.get(),amount,Date.valueOf(LocalDate.now()),
+        Expence transferIn = new Expence(idUser,toAccount.get(),amount,LocalDateTime.now(),
                 "Transfer IN",null,Type.TRANSFER_IN);
 
         expenceRepository.save(transferOut);

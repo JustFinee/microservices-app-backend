@@ -1,6 +1,5 @@
 package microservicesbackend.expenseaccountservice.controller;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import javassist.NotFoundException;
 import microservicesbackend.expenseaccountservice.entity.Category;
 import microservicesbackend.expenseaccountservice.service.CategoryService;

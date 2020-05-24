@@ -3,6 +3,7 @@ package microservicesbackend.expenseaccountservice.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Expence {
@@ -18,7 +19,7 @@ public class Expence {
     private Account account;
 
     private int amount;
-    private Date date;
+    private LocalDateTime date;
     private String note;
 
     @ManyToOne(optional = true)
@@ -30,7 +31,7 @@ public class Expence {
     public Expence() {
     }
 
-    public Expence(long idUser,Account account, int amount, Date date, String note, Subcategory subcategory, Type type) {
+    public Expence(long idUser,Account account, int amount, LocalDateTime date, String note, Subcategory subcategory, Type type) {
         this.idUser = idUser;
         this.account = account;
         this.amount = amount;
@@ -72,11 +73,11 @@ public class Expence {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

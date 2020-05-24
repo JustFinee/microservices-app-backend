@@ -41,7 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
         User user = new User(userDto.getEmail(),encoder.encode(userDto.getPassword()),grantedAuthorities);
-        System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getAuthorities());
         return user;
     }
 }
