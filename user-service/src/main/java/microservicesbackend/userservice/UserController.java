@@ -25,6 +25,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("/findUserById/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable(name = "id") Long idUser) {
+        try {
+            return new ResponseEntity<>(userService.findUserById(idUser), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Not found user with this idUser", e);
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
 

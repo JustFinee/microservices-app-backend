@@ -68,4 +68,11 @@ public class AccountController {
                     HttpStatus.NOT_FOUND, "Not found account with this id", e);
         }
     }
+
+    @PostMapping("/createInvisibleAccount/{idUser}")
+    public void createInvisibleAccount(@PathVariable("idUser") Long idUser)
+    {
+        Account invisibleAccount = new Account("InvisibleAccount",idUser,false);
+        accountService.createAccount(invisibleAccount);
+    }
 }

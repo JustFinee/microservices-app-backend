@@ -1,6 +1,8 @@
 package microservicesbackend.expenseaccountservice.controller;
 
+import com.netflix.ribbon.proxy.annotation.Http;
 import javassist.NotFoundException;
+import microservicesbackend.expenseaccountservice.dto.SumDto;
 import microservicesbackend.expenseaccountservice.entity.Expence;
 import microservicesbackend.expenseaccountservice.service.ExpenceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,20 @@ public class ExpencesController {
         else return new ResponseEntity<>(expences,HttpStatus.OK);
     }
 
+    @GetMapping("/getExpencesForUser/{userId}")
+    public ResponseEntity<Integer> getExpencesForUser(@PathVariable("userId") Long userId)
+    {
+        try{
+            return new ResponseEntity<>(expenceService.findSum(userId), HttpStatus.OK);
+        }
+        catch (NotFoundException e)
+        {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Not found expences with this user", e);
+        }
+
+    }
+
     @PostMapping("/createExpence")
     public ResponseEntity<Expence> createExpence(@RequestBody Expence expence)
     {
@@ -51,5 +67,26 @@ public class ExpencesController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Not found id", e);
         }
+
+        catch (IllegalStateException e)
+        {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "There is no enough money for transfer", e);
+        }
     }
-}
+
+    @GetMapping("/findAccountsWithSum/{userId}")
+    public ResponseEntity<List<SumDto>> findAccountWithSum(@PathVariable("userId") Long userId)
+    {
+        try {
+            return new ResponseEntity<>(expenceService.findAccountsWithSum(userId),HttpStatus.OK);
+        }
+
+        catch (NotFoundException e)
+        {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "There is no user with this id", e);
+        }
+
+        }
+    }

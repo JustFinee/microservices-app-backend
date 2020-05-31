@@ -28,6 +28,12 @@ public class CategoryController {
 
     }
 
+    @PostMapping("/createCategory")
+    public ResponseEntity<Category> createCategory(@RequestBody Category category)
+    {
+        return new ResponseEntity<>(categoryService.createCategory(category),HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/deleteCategory/{idCategory}")
     public ResponseEntity<Void> deleteCategory(@PathVariable("idCategory") Long idCategory) {

@@ -2,7 +2,9 @@ package microservicesbackend.expenseaccountservice.service;
 
 import javassist.NotFoundException;
 import microservicesbackend.expenseaccountservice.entity.Account;
+import microservicesbackend.expenseaccountservice.entity.Expence;
 import microservicesbackend.expenseaccountservice.repository.AccountRepository;
+import microservicesbackend.expenseaccountservice.repository.ExpenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,12 @@ public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private ExpenceRepository expenceRepository;
+
+    @Autowired
+    private ExpenceService expenceService;
 
 
     public Account getAccount(Long idAccount) throws NotFoundException
@@ -42,11 +50,23 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public void deleteAccount(Long idAccount) throws NotFoundException
+    public void deleteAccount(Long idAccount) throws NotFoundException, IllegalStateException
     {
-        if (accountRepository.findById(idAccount).isEmpty()) throw new NotFoundException("There no account with id "+ idAccount);
+        Optional<Account> account = accountRepository.findById(idAccount);
+        if (account.isEmpty()) throw new NotFoundException("There no account with id "+ idAccount);
+
+
+        List<Expence> expences = expenceRepository.findAllByAccount_AccountId(idAccount);
+        if (!expences.isEmpty())
+            for (int i=0;i<expences.size();i++)
+                expenceService.transfer(account.get().getIdUser(),
+                        account.get().getAccountId(),
+                        accountRepository.getInvisibleAccount(account.get().getIdUser()).getAccountId(),
+                        expences.get(i).getAmount());
+
 
         accountRepository.deleteById(idAccount);
+
     }
 
 

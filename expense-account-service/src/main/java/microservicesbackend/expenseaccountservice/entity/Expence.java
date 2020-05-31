@@ -1,6 +1,9 @@
 package microservicesbackend.expenseaccountservice.entity;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ public class Expence {
 
     @ManyToOne(optional = false)
     @JoinColumn(name="ACCOUNT_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Account account;
 
     private int amount;

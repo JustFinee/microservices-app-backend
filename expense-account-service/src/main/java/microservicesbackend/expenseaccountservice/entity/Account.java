@@ -16,16 +16,27 @@ public class Account {
 
     private Long idUser;
 
+    private boolean isVisible;
+
     public Account() {
     }
 
-    public Account(String name, Long idUser) {
+    public Account(String name, Long idUser,boolean isVisible) {
         this.name = name;
         this.idUser = idUser;
+        this.isVisible = isVisible;
     }
 
     public Long getIdUser() {
         return idUser;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 
     public void setIdUser(Long idUser) {

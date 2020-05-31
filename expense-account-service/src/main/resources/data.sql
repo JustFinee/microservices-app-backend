@@ -1,5 +1,5 @@
-INSERT INTO account (account_id, name, id_user) VALUES
-  (1L,'kontoTestowe',1L);
+INSERT INTO account (account_id, name, id_user, is_visible) VALUES
+  (1L,'kontoTestowe',1L, true);
 
 
 INSERT INTO color (color_id, color) VALUES
