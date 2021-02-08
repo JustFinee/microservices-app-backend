@@ -18,6 +18,6 @@ Application uses H2 in-memory database
 
 ## Setup
 Every microservice should be turn on independly on itself.
-$ cd auth-service-zuul / eureka-naming-server / expense-account-service
-$ mvn clean install
-$mvn spring-boot:run
+$ cd auth-service-zuul / eureka-naming-server / expense-account-service  
+$ mvn clean install  
+$mvn spring-boot:run  
