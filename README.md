@@ -1,4 +1,4 @@
-# BudGetter
+# BudGetter app
 This repository contains the server side of the application to help you control and manage your expenses.  
 
 ## General overview
@@ -20,4 +20,4 @@ Application uses H2 in-memory database
 Every microservice should be turn on independly on itself.
 $ cd auth-service-zuul / eureka-naming-server / expense-account-service  
 $ mvn clean install  
-$mvn spring-boot:run  
+$ mvn spring-boot:run  
